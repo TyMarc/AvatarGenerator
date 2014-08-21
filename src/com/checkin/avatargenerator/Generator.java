@@ -13,9 +13,10 @@ import android.util.TypedValue;
 
 public class Generator {
 
-	public static Bitmap generate(Context context) {
+	public static Bitmap generate(Context context, int widthDp, int heightDp) {
 		Canvas canvas = new Canvas();
-		Bitmap bitmap = Bitmap.createBitmap(dpInPixels(context, 120), dpInPixels(context, 120), Config.ARGB_4444);
+		Bitmap bitmap = Bitmap.createBitmap(dpInPixels(context, widthDp), dpInPixels(context, heightDp),
+				Config.ARGB_4444);
 
 		canvas.setBitmap(bitmap);
 
@@ -27,45 +28,44 @@ public class Generator {
 
 		for (int i = 0; i < 3; i++) {
 			boolean fits = true;
-			Rect r = null;
+			Rect currentRect = null;
 			do {
 				fits = true;
 				double rand = Math.random();
 				if (rand < 0.5) {
-					int left = dpInPixels(context, (int) (Math.random() * 60));
-					int top = dpInPixels(context, (int) (Math.random() * 120));
-					int right = dpInPixels(context, (int) (Math.random() * 30)) + left;
-					int bottom = dpInPixels(context, (int) (Math.random() * 120));
-					r = new Rect(left, top, right, bottom);
+					int left = dpInPixels(context, (int) (Math.random() * (widthDp / 2)));
+					int top = dpInPixels(context, (int) (Math.random() * heightDp));
+					int right = dpInPixels(context, widthDp / 6) + left;
+					int bottom = dpInPixels(context, (int) (Math.random() * heightDp));
+					currentRect = new Rect(left, top, right, bottom);
 				} else {
-					int left = dpInPixels(context, (int) (Math.random() * 60));
-					int top = dpInPixels(context, (int) (Math.random() * 120));
-					int right = dpInPixels(context, (int) (Math.random() * 60));
-					int bottom = dpInPixels(context, (int) (Math.random() * 60)) + top;
-					r = new Rect(left, top, right, bottom);
+					int left = dpInPixels(context, (int) (Math.random() * (widthDp / 2)));
+					int top = dpInPixels(context, (int) (Math.random() * heightDp));
+					int right = dpInPixels(context, (int) (Math.random() * (widthDp / 2)));
+					int bottom = dpInPixels(context, heightDp / 6) + top;
+					currentRect = new Rect(left, top, right, bottom);
 				}
 
-				for (Rect rr : rects) {
-					if (rr.contains(r)) {
+				for (Rect existingRect : rects) {
+					if (existingRect.contains(currentRect)) {
 						fits = false;
 					}
 				}
 			} while (!fits);
-			rects.add(r);
-			canvas.drawRect(r, paint);
+			rects.add(currentRect);
+			canvas.drawRect(currentRect, paint);
 		}
 
-		for (int i = 0; i < 3; i++) {
-			Rect r = rects.get(i);
-			r.left = dpInPixels(context, 120) - r.left;
-			r.right = dpInPixels(context, 120) - r.right;
+		for (Rect r : rects) {
+			r.left = dpInPixels(context, widthDp) - r.left;
+			r.right = dpInPixels(context, widthDp) - r.right;
 			canvas.drawRect(r, paint);
 		}
 
 		return bitmap;
 	}
 
-	public static int dpInPixels(Context context, int dp) {
+	private static int dpInPixels(Context context, int dp) {
 		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources()
 				.getDisplayMetrics());
 	}

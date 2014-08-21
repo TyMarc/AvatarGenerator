@@ -1,8 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e2e2e2"
+    android:columnCount="2"
     tools:context="com.checkin.avatargenerator.MainActivity" >
 
     <com.checkin.avatargenerator.RoundedImageView
@@ -10,5 +11,23 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:background="@drawable/rounded_img_bg" />
+    
+     <com.checkin.avatargenerator.RoundedImageView
+        android:id="@+id/roundedImage2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/rounded_img_bg" />
+     
+      <com.checkin.avatargenerator.RoundedImageView
+        android:id="@+id/roundedImage3"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/rounded_img_bg" />
+      
+       <com.checkin.avatargenerator.RoundedImageView
+        android:id="@+id/roundedImage4"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/rounded_img_bg" />
 
-</RelativeLayout>
+</GridLayout>
