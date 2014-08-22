@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e2e2e2"
-    android:columnCount="2"
+    android:columnCount="3"
     tools:context="com.checkin.avatargenerator.MainActivity" >
 
     <com.checkin.avatargenerator.RoundedImageView
@@ -26,6 +26,54 @@
       
        <com.checkin.avatargenerator.RoundedImageView
         android:id="@+id/roundedImage4"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/rounded_img_bg" />
+       
+       <com.checkin.avatargenerator.RoundedImageView
+        android:id="@+id/roundedImage5"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/rounded_img_bg" />
+    
+     <com.checkin.avatargenerator.RoundedImageView
+        android:id="@+id/roundedImage6"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/rounded_img_bg" />
+     
+      <com.checkin.avatargenerator.RoundedImageView
+        android:id="@+id/roundedImage7"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/rounded_img_bg" />
+      
+       <com.checkin.avatargenerator.RoundedImageView
+        android:id="@+id/roundedImage8"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/rounded_img_bg" />
+       
+       <com.checkin.avatargenerator.RoundedImageView
+        android:id="@+id/roundedImage9"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/rounded_img_bg" />
+    
+     <com.checkin.avatargenerator.RoundedImageView
+        android:id="@+id/roundedImage10"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/rounded_img_bg" />
+     
+      <com.checkin.avatargenerator.RoundedImageView
+        android:id="@+id/roundedImage11"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/rounded_img_bg" />
+      
+       <com.checkin.avatargenerator.RoundedImageView
+        android:id="@+id/roundedImage12"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:background="@drawable/rounded_img_bg" />
