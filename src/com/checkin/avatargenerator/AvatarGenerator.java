@@ -20,6 +20,80 @@ public class AvatarGenerator {
 
 	/**
 	 * Generate an avatar based on dimensions
+	 * @param width The width of the image in px
+	 * @param height The height of the image in px
+	 * @return Returns the generated image
+	 */
+	public static Bitmap generate(int width, int height) {
+		Canvas canvas = new Canvas();
+		//We create a bitmap adapted to the screen
+		Bitmap bitmap = Bitmap.createBitmap(width, height,
+				Config.ARGB_4444);
+
+		canvas.setBitmap(bitmap);
+
+		//We use a random paint color for the rectangles
+		int color = Color.rgb((int) (Math.random() * 254), (int) (Math.random() * 254), (int) (Math.random() * 254));
+		Paint paint = new Paint();
+		paint.setColor(color);
+
+		ArrayList<Rect> rects = new ArrayList<Rect>();
+
+
+		do{
+			//We clear the canvas
+			canvas.drawColor(Color.TRANSPARENT);
+			//We create and draw three rectangles
+			for (int i = 0; i < 3; i++) {
+				boolean fits = true;
+				Rect currentRect = null;
+				do {
+					fits = true;
+					double rand = Math.random();
+					//We love horizontal rects more than vertical ones.
+					if (rand < 0.4) {
+						//vertical
+						int left = (int) (Math.random() * (width / 2));
+						int top = (int) (Math.random() * height);
+						int right = width / 6 + left;
+						int bottom = (int) Math.max((Math.random() * height), Math.min(20 + top, height));
+						currentRect = new Rect(left, top, right, bottom);
+					} else {
+						//horizontal
+						int left = (int) (Math.random() * (width / 2));
+						int top = (int) (Math.random() * height);
+						int right = (int) Math.max((Math.random() * (width / 2)), Math.min(20 + left, width / 2));
+						int bottom = (height / 6) + top;
+						currentRect = new Rect(left, top, right, bottom);
+					}
+					
+					//We don't want rectangles to copulate.
+					for (Rect existingRect : rects) {
+						if (existingRect.contains(currentRect)) {
+							fits = false;
+						}
+					}
+				} while (!fits);
+				
+				//If it fits, we add it to the array and draw it.
+				rects.add(currentRect);
+				canvas.drawRect(currentRect, paint);
+			}
+
+			//Now that we have drawn half of the canvas, we do a symmetrical copy of the first half.
+			for (Rect r : rects) {
+				r.left = width - r.left;
+				r.right = width - r.right;
+				canvas.drawRect(r, paint);
+			}
+		} while(percentTransparent(bitmap, Math.min(width, height)) > 0.7);
+
+
+		return bitmap;
+	}
+	
+	/**
+	 * Generate an avatar based on dimensions
 	 * @param context The Context
 	 * @param widthDp The width of the image in dp
 	 * @param heightDp The height of the image in dp
