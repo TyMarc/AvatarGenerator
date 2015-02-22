@@ -191,8 +191,15 @@ public class AvatarGenerator {
 		final int yInit = yStep/2;
 
 		// center of the last rectangle
-		final int xEnd = width - xStep/2;
-		final int yEnd = height - yStep/2;
+		int xEnd = width - xStep/2;
+		int yEnd = height - yStep/2;
+		
+		if (xEnd >= width) {
+			xEnd = width-1;
+		}
+		if (yEnd >= height) {
+			yEnd = height-1;
+		}
 
 		int totalTransparent = 0;
 
